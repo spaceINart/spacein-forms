@@ -24,19 +24,8 @@
 </iframe>
 
 <script>
-  var frame = document.getElementById('formFrame');
 
-  window.addEventListener('message', function(e) {
-    if (!e.data || e.data.type !== 'resize') return;
-    var h = parseInt(e.data.height);
-    if (isNaN(h) || h < 100) return;
-    frame.style.height = (h + 20) + 'px';
-    window.parent.postMessage({ type: 'resize', height: h + 20 }, '*');
-  });
-
-  frame.style.height = '800px';
-
- // Apps Script에서 오는 navigate 메시지 수신
+// Apps Script에서 오는 navigate 메시지 수신
 window.addEventListener('message', function(e) {
   if (e.data && e.data.type === 'resize') {
     var frame = document.getElementById('formFrame');
