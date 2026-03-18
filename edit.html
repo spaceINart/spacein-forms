@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>spaceIN Art Studio — Edit Profile</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: transparent; overflow: hidden; }
+  iframe {
+    width: 100%;
+    border: none;
+    display: block;
+    min-height: 600px;
+    transition: height 0.3s ease;
+  }
+</style>
+</head>
+<body>
+<iframe
+  id="formFrame"
+  src="https://script.google.com/a/~/macros/s/AKfycbwvUl8clMtLXKqD-7m_JUTlInirpW9vQcqvPpHXH8KqAe19p7e7zSJks4bjyuvPW4t0IA/exec?page=edit"
+  scrolling="no">
+</iframe>
+
+<script>
+  var frame = document.getElementById('formFrame');
+
+  window.addEventListener('message', function(e) {
+    if (!e.data || e.data.type !== 'resize') return;
+    var h = parseInt(e.data.height);
+    if (isNaN(h) || h < 100) return;
+    frame.style.height = (h + 20) + 'px';
+    window.parent.postMessage({ type: 'resize', height: h + 20 }, '*');
+  });
+
+  frame.style.height = '800px';
+</script>
+</body>
+</html>
